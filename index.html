@@ -382,8 +382,17 @@
   </main>
 
   <script>
-    const gitVersion = "040fedf";
-    document.getElementById("version").textContent = `Version: ${gitVersion}`;
+    const gitVersion = "b892b14";
+    const gitTimestamp = "2025-12-07T18:04:49+00:00";
+
+    const formattedDate = new Date(gitTimestamp).toLocaleString("de-DE", {
+      timeZone: "UTC",
+      dateStyle: "medium",
+      timeStyle: "short",
+      timeZoneName: "short",
+    });
+
+    document.getElementById("version").textContent = `Version: ${gitVersion} (Stand: ${formattedDate})`;
   </script>
 </body>
 </html>
