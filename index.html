@@ -11,6 +11,8 @@
       --accent-1: #38bdf8;
       --accent-2: #a855f7;
       --accent-3: #22d3ee;
+      --accent-4: #f472b6;
+      --accent-5: #fbbf24;
     }
 
     * {
@@ -27,92 +29,281 @@
       color: #e2e8f0;
       text-align: center;
       padding: 1.5rem;
+      overflow: hidden;
     }
 
     .card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 640px;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 700px;
       width: 100%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(6px);
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(56, 189, 248, 0.1);
+      backdrop-filter: blur(12px);
     }
 
     h1 {
       margin: 0 0 1rem;
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
       letter-spacing: 0.01em;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-4));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 
     p {
-      margin: 0 0 1.5rem;
+      margin: 0 0 2rem;
       color: #cbd5e1;
       line-height: 1.6;
+      font-size: 1.05rem;
     }
 
     .spinner {
       position: relative;
-      width: min(360px, 70vw);
+      width: min(400px, 75vw);
       aspect-ratio: 1;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 2rem;
       display: grid;
       place-items: center;
     }
 
-    .ring {
+    /* Äußerer Ring - langsam */
+    .ring-outer {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      border: 10px solid transparent;
-      background:
-        conic-gradient(from 0deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
-      mask:
-        radial-gradient(farthest-side, transparent calc(50% - 14px), black calc(50% - 12px));
-      animation: rotate 6s linear infinite;
-      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.35));
+      background: conic-gradient(
+        from 0deg,
+        var(--accent-1),
+        var(--accent-2),
+        var(--accent-4),
+        var(--accent-5),
+        var(--accent-1)
+      );
+      mask: radial-gradient(farthest-side, transparent calc(50% - 16px), black calc(50% - 14px));
+      animation: rotate-slow 12s linear infinite;
+      filter:
+        drop-shadow(0 0 20px rgba(56, 189, 248, 0.5))
+        drop-shadow(0 0 40px rgba(168, 85, 247, 0.3));
+      opacity: 0.9;
     }
 
+    /* Mittlerer Ring - medium */
+    .ring-middle {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 180deg,
+        var(--accent-3),
+        var(--accent-1),
+        var(--accent-2),
+        var(--accent-3)
+      );
+      mask: radial-gradient(farthest-side, transparent calc(50% - 14px), black calc(50% - 12px));
+      animation: rotate-medium 8s linear infinite reverse;
+      filter:
+        drop-shadow(0 0 15px rgba(34, 211, 238, 0.6))
+        drop-shadow(0 0 30px rgba(56, 189, 248, 0.4));
+      opacity: 0.85;
+    }
+
+    /* Innerer Ring - schnell */
+    .ring-inner {
+      position: absolute;
+      inset: 24%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 90deg,
+        var(--accent-2),
+        var(--accent-4),
+        var(--accent-5),
+        var(--accent-1),
+        var(--accent-2)
+      );
+      mask: radial-gradient(farthest-side, transparent calc(50% - 12px), black calc(50% - 10px));
+      animation: rotate-fast 5s linear infinite;
+      filter:
+        drop-shadow(0 0 12px rgba(168, 85, 247, 0.7))
+        drop-shadow(0 0 25px rgba(244, 114, 182, 0.5));
+      opacity: 0.8;
+    }
+
+    /* Zentrale Kugel mit verbessertem Glow */
     .orb {
-      width: 38%;
+      width: 42%;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #e0f2fe, #38bdf8 35%, #0ea5e9 60%, #0f172a 100%);
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, transparent 10%),
+        radial-gradient(circle at 30% 30%, #e0f2fe, #38bdf8 25%, #0ea5e9 50%, #7c3aed 75%, #0f172a 100%);
       box-shadow:
-        inset 0 10px 24px rgba(255, 255, 255, 0.12),
-        inset 0 -8px 22px rgba(15, 23, 42, 0.35),
-        0 0 25px rgba(56, 189, 248, 0.2);
-      animation: float 5s ease-in-out infinite;
+        inset 0 15px 30px rgba(255, 255, 255, 0.2),
+        inset 0 -12px 28px rgba(15, 23, 42, 0.4),
+        0 0 40px rgba(56, 189, 248, 0.4),
+        0 0 80px rgba(168, 85, 247, 0.3),
+        0 0 120px rgba(56, 189, 248, 0.2);
+      animation: float 6s ease-in-out infinite, pulse 4s ease-in-out infinite;
+      position: relative;
+      z-index: 10;
     }
 
-    @keyframes rotate {
-      to {
-        transform: rotate(360deg);
-      }
+    /* Zusätzlicher Glow-Effekt hinter der Kugel */
+    .orb::before {
+      content: '';
+      position: absolute;
+      inset: -30%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 60%);
+      animation: glow-pulse 3s ease-in-out infinite;
+      z-index: -1;
+      filter: blur(20px);
+    }
+
+    /* Partikel-Effekte */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      animation: particle-float 8s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) {
+      top: 10%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      top: 30%;
+      right: 15%;
+      animation-delay: 1.5s;
+    }
+
+    .particle:nth-child(3) {
+      bottom: 20%;
+      left: 25%;
+      animation-delay: 3s;
+    }
+
+    .particle:nth-child(4) {
+      bottom: 35%;
+      right: 20%;
+      animation-delay: 4.5s;
+    }
+
+    .particle:nth-child(5) {
+      top: 50%;
+      left: 10%;
+      animation-delay: 6s;
+    }
+
+    @keyframes rotate-slow {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotate-medium {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotate-fast {
+      to { transform: rotate(360deg); }
     }
 
     @keyframes float {
       0%, 100% {
-        transform: translateY(-6px) scale(1);
+        transform: translateY(-8px) scale(1);
       }
       50% {
-        transform: translateY(6px) scale(1.02);
+        transform: translateY(8px) scale(1.03);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow:
+          inset 0 15px 30px rgba(255, 255, 255, 0.2),
+          inset 0 -12px 28px rgba(15, 23, 42, 0.4),
+          0 0 40px rgba(56, 189, 248, 0.4),
+          0 0 80px rgba(168, 85, 247, 0.3),
+          0 0 120px rgba(56, 189, 248, 0.2);
+      }
+      50% {
+        box-shadow:
+          inset 0 15px 30px rgba(255, 255, 255, 0.25),
+          inset 0 -12px 28px rgba(15, 23, 42, 0.35),
+          0 0 50px rgba(56, 189, 248, 0.5),
+          0 0 100px rgba(168, 85, 247, 0.4),
+          0 0 150px rgba(56, 189, 248, 0.3);
+      }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes particle-float {
+      0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(-30px) translateX(10px);
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-60px) translateX(-5px);
       }
     }
 
     footer {
       font-size: 0.95rem;
       color: #94a3b8;
+      margin-top: 1rem;
     }
 
     a {
       color: var(--accent-1);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     a:hover {
+      color: var(--accent-2);
       text-decoration: underline;
+    }
+
+    /* Responsive Anpassungen */
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.5rem;
+      }
+
+      .spinner {
+        width: min(300px, 85vw);
+      }
     }
   </style>
 </head>
@@ -121,8 +312,15 @@
     <h1>Rotierende Grafik</h1>
     <p>Eine minimale Single-Page-Webapp mit einer sanft rotierenden Grafik und leuchtenden Farben.</p>
     <div class="spinner" role="presentation">
-      <div class="ring" aria-hidden="true"></div>
+      <div class="ring-outer" aria-hidden="true"></div>
+      <div class="ring-middle" aria-hidden="true"></div>
+      <div class="ring-inner" aria-hidden="true"></div>
       <div class="orb" aria-hidden="true"></div>
+      <div class="particle" aria-hidden="true"></div>
+      <div class="particle" aria-hidden="true"></div>
+      <div class="particle" aria-hidden="true"></div>
+      <div class="particle" aria-hidden="true"></div>
+      <div class="particle" aria-hidden="true"></div>
     </div>
     <footer>
       Animiert mit CSS — keine zusätzlichen Abhängigkeiten.
