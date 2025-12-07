@@ -377,22 +377,39 @@
     </div>
     <footer>
       <div>Animiert mit CSS — keine zusätzlichen Abhängigkeiten.</div>
-      <div id="version"></div>
+      <div id="version" aria-live="polite"></div>
     </footer>
   </main>
 
   <script>
-    const gitVersion = "b892b14";
-    const gitTimestamp = "2025-12-07T18:04:49+00:00";
+    const formatDate = (timestamp) =>
+      new Date(timestamp).toLocaleString("de-DE", {
+        timeZone: "UTC",
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZoneName: "short",
+      });
 
-    const formattedDate = new Date(gitTimestamp).toLocaleString("de-DE", {
-      timeZone: "UTC",
-      dateStyle: "medium",
-      timeStyle: "short",
-      timeZoneName: "short",
-    });
+    const renderVersion = ({ hash, timestamp }) => {
+      if (!hash) return "Version: unbekannt";
 
-    document.getElementById("version").textContent = `Version: ${gitVersion} (Stand: ${formattedDate})`;
+      const dateLabel = timestamp ? ` (Stand: ${formatDate(timestamp)})` : "";
+      return `Version: ${hash}${dateLabel}`;
+    };
+
+    const versionEl = document.getElementById("version");
+
+    fetch("version.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Keine Versionsdatei gefunden");
+        return response.json();
+      })
+      .then((data) => {
+        versionEl.textContent = renderVersion(data);
+      })
+      .catch(() => {
+        versionEl.textContent = "Version: nicht verfügbar";
+      });
   </script>
 </body>
 </html>
