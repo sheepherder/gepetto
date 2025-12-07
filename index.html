@@ -323,8 +323,14 @@
       <div class="particle" aria-hidden="true"></div>
     </div>
     <footer>
-      Animiert mit CSS — keine zusätzlichen Abhängigkeiten.
+      <div>Animiert mit CSS — keine zusätzlichen Abhängigkeiten.</div>
+      <div id="version"></div>
     </footer>
   </main>
+
+  <script>
+    const gitVersion = "040fedf";
+    document.getElementById("version").textContent = `Version: ${gitVersion}`;
+  </script>
 </body>
 </html>
