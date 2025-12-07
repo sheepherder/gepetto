@@ -323,8 +323,40 @@
       <div class="particle" aria-hidden="true"></div>
     </div>
     <footer>
-      Animiert mit CSS — keine zusätzlichen Abhängigkeiten.
+      <div>Animiert mit CSS — keine zusätzlichen Abhängigkeiten.</div>
+      <div id="version" aria-live="polite"></div>
     </footer>
   </main>
+
+  <script>
+    const formatDate = (timestamp) =>
+      new Date(timestamp).toLocaleString("de-DE", {
+        timeZone: "UTC",
+        dateStyle: "medium",
+        timeStyle: "short",
+        timeZoneName: "short",
+      });
+
+    const renderVersion = ({ hash, timestamp }) => {
+      if (!hash) return "Version: unbekannt";
+
+      const dateLabel = timestamp ? ` (Stand: ${formatDate(timestamp)})` : "";
+      return `Version: ${hash}${dateLabel}`;
+    };
+
+    const versionEl = document.getElementById("version");
+
+    fetch("version.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Keine Versionsdatei gefunden");
+        return response.json();
+      })
+      .then((data) => {
+        versionEl.textContent = renderVersion(data);
+      })
+      .catch(() => {
+        versionEl.textContent = "Version: nicht verfügbar";
+      });
+  </script>
 </body>
 </html>
