@@ -3,7 +3,7 @@
 Eine minimale Single-Page-Webapp mit einer rotierenden Grafik. Die Seite nutzt nur HTML und CSS und wird automatisch über GitHub Pages veröffentlicht.
 
 ## Lokal ansehen
-Öffne einfach `index.html` in einem Browser.
+Öffne einfach `index.html` in einem Browser. Check it!
 
 ## Deployment
 Ein GitHub-Actions-Workflow (`.github/workflows/pages.yml`) veröffentlicht den Inhalt des Repositoriums automatisch auf GitHub Pages, sobald auf den Branch `main` gepusht wird oder der Workflow manuell ausgelöst wird.
@@ -18,4 +18,6 @@ automatisch, du kannst sie aber auch lokal erzeugen:
 ```
 
 Die erzeugte Datei enthält Commit-Hash und Zeitstempel des aktuellen HEAD und wird beim Laden der Seite ausgelesen.
-Klappt leider nicht!
+Klappt leider nicht! 
+
+TODO: mit Claude ausprobieren
