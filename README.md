@@ -18,4 +18,4 @@ automatisch, du kannst sie aber auch lokal erzeugen:
 ```
 
 Die erzeugte Datei enthält Commit-Hash und Zeitstempel des aktuellen HEAD und wird beim Laden der Seite ausgelesen.
-Klappt leider nicht!
+Klappt leider nicht! TODO: mit Claude ausprobieren
